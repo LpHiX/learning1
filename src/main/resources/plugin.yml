@@ -1,0 +1,9 @@
+name: FUCKYOU
+version: ${project.version}
+main: me.i234.gangamlorder.lphix.fuckyou.FUCKYOU
+api-version: 1.13
+prefix: "FUCKYOU"
+load: STARTUP
+authors: [fuckyouuuuuuuuuuuu]
+description: fuck you! <3
+website: gangamlorder.i234.me
