@@ -17,7 +17,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PlayerListener implements Listener {
@@ -73,8 +72,25 @@ public class PlayerListener implements Listener {
     }
     @EventHandler
     public void stronk(PlayerItemConsumeEvent event){
+
+        //Create GUI
         Inventory inventory = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&b&lStronk"));
-        Itemstack[] stop = inventory.getContents();
+        ItemStack[] contents = inventory.getContents();
+        //Now that we have the the contents of the inventory lets loop through them!
+        for (int index = 0; index < contents.length; index++) {
+            //Check if the item is null, if it isn't that means an item is present.
+            if (contents[index] != null) {
+                continue;
+            }
+            //Set the background to Black stained glass.
+            ItemStack background = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+            ItemMeta itemMeta = background.getItemMeta();
+            itemMeta.setDisplayName(" ");
+            background.setItemMeta(itemMeta);
+            //Set the ItemStack of contents[index] to be the background.
+            contents[index] = background;
+        }
+
     }
 
 }

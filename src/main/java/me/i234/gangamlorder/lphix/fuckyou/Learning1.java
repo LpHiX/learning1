@@ -5,9 +5,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
 
-public final class FUCKYOU extends JavaPlugin {
+public final class Learning1 extends JavaPlugin {
 
-    private static FUCKYOU instance;
+    private static Learning1 instance;
 
     @Override
     public void onEnable() {
@@ -19,6 +19,10 @@ public final class FUCKYOU extends JavaPlugin {
     @Override
     public void onDisable() {
         instance = null;
+    }
+
+    public Learning1 getInstance() {
+        return instance;
     }
 }
 

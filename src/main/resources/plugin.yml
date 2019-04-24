@@ -1,8 +1,8 @@
-name: FUCKYOU
+name: Learning1
 version: ${project.version}
-main: me.i234.gangamlorder.lphix.fuckyou.FUCKYOU
+main: me.i234.gangamlorder.lphix.fuckyou.Learning1
 api-version: 1.13
-prefix: "FUCKYOU"
+prefix: "Learning1"
 load: STARTUP
 authors: [fuckyouuuuuuuuuuuu]
 description: fuck you! <3
