@@ -1,6 +1,7 @@
 package me.i234.gangamlorder.lphix.fuckyou.listener;
 
 import me.i234.gangamlorder.lphix.fuckyou.utils.Common;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,7 +72,7 @@ public class PlayerListener implements Listener {
     }
     @EventHandler
     public void stronk(PlayerItemConsumeEvent event){
-        Inventory inventory = new Inventory();
+        Inventory inventory = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&b&lStronk"));
     }
 
 }
