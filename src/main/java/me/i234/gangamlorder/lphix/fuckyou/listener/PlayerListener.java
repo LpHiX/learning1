@@ -17,6 +17,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class PlayerListener implements Listener {
@@ -73,6 +74,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void stronk(PlayerItemConsumeEvent event){
         Inventory inventory = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&b&lStronk"));
+        Itemstack[] stop = inventory.getContents();
     }
 
 }
