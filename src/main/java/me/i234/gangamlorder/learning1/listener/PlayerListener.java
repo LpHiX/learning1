@@ -26,7 +26,6 @@ public final class PlayerListener implements Listener {
 
     private static String spawnMessage = Common.colorize("&aGo back to spawn! You're mum isn't here.");
     private boolean registered; //DO NOT CHANGE THIS. booleans are by default false;
-    private boolean test;
 
 
 
@@ -81,6 +80,11 @@ public final class PlayerListener implements Listener {
 
     @EventHandler
     public void playerConsumeListener(PlayerItemConsumeEvent event) {
+
+
+        Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to exit."), Material.BARRIER);
+
+
         int size = 27;
         String name = "&b&lDrink up!";
         Map<Integer, ItemStack> buttonMap = new HashMap<>();

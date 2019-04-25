@@ -15,8 +15,8 @@ public final class Learning1 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         instance = this;
+        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getLogger().log(Level.WARNING, "I HATE YOU SO MUCH ANDY");
     }
 
