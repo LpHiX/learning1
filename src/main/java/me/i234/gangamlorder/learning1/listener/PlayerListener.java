@@ -28,7 +28,6 @@ public final class PlayerListener implements Listener {
     private boolean registered; //DO NOT CHANGE THIS. booleans are by default false;
 
 
-
     @EventHandler
     public void moveListener(PlayerMoveEvent event) {
         Player player = event.getPlayer();
@@ -84,7 +83,11 @@ public final class PlayerListener implements Listener {
         int size = 27;
         String name = "&b&lDrink up!";
         Map<Integer, ItemStack> buttonMap = new HashMap<>();
-        //Since the integer is the slot index...
+
+        // Make use of new utility method makeButton
+
+        //TODO Add an extra button. That shows the player's name and the current item they are holding.
+
 
         ItemStack exit = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to exit."), Material.BARRIER);
         buttonMap.put(10, exit); //Place the exit button at the 10th INDEX.
@@ -117,6 +120,8 @@ public final class PlayerListener implements Listener {
                 event.setCancelled(true); //Cancel the click event so they cannot
 
                 Player player = (Player) event.getWhoClicked();
+                //Since #getWhoClicked() returns a HumanEntity which is a subclass of Player, its ok to "cast" it to player
+
                 //Switch statement replaces if else.
                 switch (slot) {
                     default:

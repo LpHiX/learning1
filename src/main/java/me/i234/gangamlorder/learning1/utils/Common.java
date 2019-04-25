@@ -74,12 +74,23 @@ public class Common {
         return inv;
     }
 
+    /**
+     * Create a button for GUI creation.
+     *
+     * @param displayName of the Item.
+     * @param lore        of the Item
+     * @param itemType    of the Item
+     * @return an {@link ItemStack} with the lore, name and itemType completed.
+     * @throws UnsupportedOperationException if the itemType is <code>null</code>;
+     */
+
     public static ItemStack makeButton(String displayName, List<String> lore, Material itemType) {
 
         displayName = colorize(displayName);
 
         if (itemType == null) {
             throw new UnsupportedOperationException("itemType is null!");
+            //THis means the method will be UNABLE to run because we can't create an item with no item type.
         }
 
         if (lore == null) {
@@ -89,11 +100,9 @@ public class Common {
             item.setItemMeta(itemMeta);
             return item;
         }
-
         for (String string : lore) {
             lore.set(lore.indexOf(string), colorize(string));
         }
-
         ItemStack item = new ItemStack(itemType);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(displayName);
