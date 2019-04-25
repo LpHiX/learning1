@@ -26,7 +26,7 @@ public final class PlayerListener implements Listener {
 
     private static String spawnMessage = Common.colorize("&aGo back to spawn! You're mum isn't here.");
     private boolean registered; //DO NOT CHANGE THIS. booleans are by default false;
-
+    private boolean test;
 
     @EventHandler
     public void movement(PlayerMoveEvent event) {
