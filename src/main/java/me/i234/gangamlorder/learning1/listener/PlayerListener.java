@@ -28,8 +28,10 @@ public final class PlayerListener implements Listener {
     private boolean registered; //DO NOT CHANGE THIS. booleans are by default false;
     private boolean test;
 
+
+
     @EventHandler
-    public void movement(PlayerMoveEvent event) {
+    public void moveListener(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         Location location = player.getLocation();
 
@@ -42,7 +44,7 @@ public final class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void drop(PlayerDropItemEvent event) {
+    public void playerDropItemListener(PlayerDropItemEvent event) {
         Item item = event.getItemDrop();
         Player player = event.getPlayer();
         Location spawn = new Location(player.getWorld(), 0, 100, 0);
@@ -53,11 +55,11 @@ public final class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void listenToMyChatNigger(AsyncPlayerChatEvent event) {
+    public void chatListener(AsyncPlayerChatEvent event) {
         ItemStack item = new ItemStack(Material.SALMON_SPAWN_EGG);
-        String nigger = event.getMessage();
-        Player penis = event.getPlayer();
-        if (!nigger.contains("SUCK MY DICK NIGGA")) {
+        String message = event.getMessage();
+        Player player = event.getPlayer();
+        if (!message.contains("SUCK MY DICK NIGGA")) {
             return;
         }
 
@@ -70,9 +72,10 @@ public final class PlayerListener implements Listener {
 
         item.setItemMeta(itemMeta);
 
-        penis.getInventory().addItem(item);
+        player.getInventory().addItem(item);
+
         for (int i = 0; i < 5; i++) {
-            Common.tell(penis, "&a&l&n" + nigger + "lolololololololol");
+            Common.tell(player, "&a&l&n" + message + "lolololololololol");
         }
     }
 
