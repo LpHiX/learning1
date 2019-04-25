@@ -81,41 +81,19 @@ public final class PlayerListener implements Listener {
     @EventHandler
     public void playerConsumeListener(PlayerItemConsumeEvent event) {
 
-
-        Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to exit."), Material.BARRIER);
-
-
         int size = 27;
         String name = "&b&lDrink up!";
         Map<Integer, ItemStack> buttonMap = new HashMap<>();
         //Since the integer is the slot index...
 
-        ItemStack exit = new ItemStack(Material.BARRIER);
-        ItemMeta exitMeta = exit.getItemMeta();
-        exitMeta.setDisplayName(Common.colorize("&c&lExit"));
-        exitMeta.setLore(Arrays.asList(
-                Common.colorize("&cPress this button to exit the menu.")
-        ));
-        exit.setItemMeta(exitMeta);
-        buttonMap.put(12, exit); //Place the exit button at the 12th INDEX.
+        ItemStack exit = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to exit."), Material.BARRIER);
+        buttonMap.put(10, exit); //Place the exit button at the 10th INDEX.
 
 
-        ItemStack yes = new ItemStack(Material.EMERALD_BLOCK);
-        ItemMeta yesMeta = yes.getItemMeta();
-        yesMeta.setDisplayName(Common.colorize("&a&lContinue to drink?"));
-        yesMeta.setLore(Arrays.asList(
-                Common.colorize("&aPress this button to continue drinking.")
-        ));
-        yes.setItemMeta(exitMeta);
+        ItemStack yes = Common.makeButton("&a&lContinue to drink?", Arrays.asList("&aPress this button to continue drinking."), Material.EMERALD_BLOCK);
         buttonMap.put(16, yes);
 
-        ItemStack no = new ItemStack(Material.REDSTONE_BLOCK);
-        ItemMeta noMeta = no.getItemMeta();
-        noMeta.setDisplayName(Common.colorize("&c&lStop consuming"));
-        noMeta.setLore(Arrays.asList(
-                Common.colorize("&cPress this button to stop eating/drinking.")
-        ));
-        no.setItemMeta(noMeta);
+        ItemStack no = Common.makeButton("&c&lStop consuming.", Arrays.asList("&cPress this button to stop eating/drinking."), Material.REDSTONE_BLOCK);
         buttonMap.put(13, no);
 
         Inventory gui = Common.makeGUI(name, size, buttonMap, null);
@@ -138,18 +116,33 @@ public final class PlayerListener implements Listener {
                 int slot = event.getSlot(); //This gets the clicked slot
                 event.setCancelled(true); //Cancel the click event so they cannot
 
+                Player player = (Player) event.getWhoClicked();
                 //Switch statement replaces if else.
                 switch (slot) {
                     default:
+                        return;
+                    case 10:
+                        player.closeInventory();
+                        ;
+                        Common.tell(player, "&cYou have closed the menu - the action has been cancelled.");
+                        break;
+                    case 13:
+                        player.closeInventory();
+                        Common.tell(player, "&cThe action has been stipped");
+                        break;
+                    case 16:
+                        player.closeInventory();
+                        event.setCancelled(false);
+                        Common.tell(player, "&aThe action has been allowed");
+
                 }
-
-
             }
         }
         if (!registered) {
             Learning1.getInstance().getServer().getPluginManager().registerEvents(new InventoryListener(), Learning1.getInstance());
             registered = true;
         }
+
 
     }
 
