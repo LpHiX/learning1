@@ -1,6 +1,6 @@
-package me.i234.gangamlorder.lphix.fuckyou;
+package me.i234.gangamlorder.learning1;
 
-import me.i234.gangamlorder.lphix.fuckyou.listener.PlayerListener;
+import me.i234.gangamlorder.learning1.listener.PlayerListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -8,6 +8,10 @@ import java.util.logging.Level;
 public final class Learning1 extends JavaPlugin {
 
     private static Learning1 instance;
+
+    public static Learning1 getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -19,10 +23,6 @@ public final class Learning1 extends JavaPlugin {
     @Override
     public void onDisable() {
         instance = null;
-    }
-
-    public Learning1 getInstance() {
-        return instance;
     }
 }
 

@@ -1,6 +1,6 @@
 name: Learning1
 version: ${project.version}
-main: me.i234.gangamlorder.lphix.fuckyou.Learning1
+main: Learning1
 api-version: 1.13
 prefix: "Learning1"
 load: STARTUP

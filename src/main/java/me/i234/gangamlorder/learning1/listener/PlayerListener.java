@@ -1,6 +1,7 @@
-package me.i234.gangamlorder.lphix.fuckyou.listener;
+package me.i234.gangamlorder.learning1.listener;
 
-import me.i234.gangamlorder.lphix.fuckyou.utils.Common;
+import me.i234.gangamlorder.learning1.Learning1;
+import me.i234.gangamlorder.learning1.utils.Common;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -8,6 +9,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
@@ -20,9 +22,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayerListener implements Listener {
+public final class PlayerListener implements Listener {
 
-    private static String spawnMessage = ChatColor.GREEN + "wYOUR MOM IS NOT HERE, GO BACK TO SPAWN";
+    private static String spawnMessage = Common.colorize("&aGo back to spawn! You're mum isn't here.");
+    private boolean registered; //DO NOT CHANGE THIS. booleans are by default false;
+
 
     @EventHandler
     public void movement(PlayerMoveEvent event) {
@@ -71,9 +75,9 @@ public class PlayerListener implements Listener {
             Common.tell(penis, "&a&l&n" + nigger + "lolololololololol");
         }
     }
+
     @EventHandler
     public void playerConsumeListener(PlayerItemConsumeEvent event) {
-
         int size = 27;
         String name = "&b&lDrink up!";
         Map<Integer, ItemStack> buttonMap = new HashMap<>();
@@ -109,6 +113,37 @@ public class PlayerListener implements Listener {
 
         Inventory gui = Common.makeGUI(name, size, buttonMap, null);
         event.getPlayer().openInventory(gui);
+
+
+        //TODO make sure this works.
+
+        /*
+        This is an expiermental nested class that will deal with the inventory clicking. No clue if this will work.
+         */
+        class InventoryListener implements Listener {
+            @EventHandler
+            public void inventoryClickEvent(InventoryClickEvent event) {
+                //Check if the inventory is the GUI, if not ignore by returning nothing.
+                if (!event.getInventory().equals(gui)) {
+                    return;
+                }
+
+                int slot = event.getSlot(); //This gets the clicked slot
+                event.setCancelled(true); //Cancel the click event so they cannot
+
+                //Switch statement replaces if else.
+                switch (slot) {
+                    default:
+                }
+
+
+            }
+        }
+        if (!registered) {
+            Learning1.getInstance().getServer().getPluginManager().registerEvents(new InventoryListener(), Learning1.getInstance());
+            registered = true;
+        }
+
     }
 
 }

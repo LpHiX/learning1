@@ -1,4 +1,4 @@
-package me.i234.gangamlorder.lphix.fuckyou.utils;
+package me.i234.gangamlorder.learning1.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -19,7 +19,7 @@ public class Common {
      * @param message the message you want to send.
      */
 
-    public static void tell(Player toWho, String message){
+    public static void tell(Player toWho, String message) {
         String newMessage = ChatColor.translateAlternateColorCodes('&', message);
         toWho.sendMessage(newMessage);
     }
@@ -32,8 +32,8 @@ public class Common {
      * @return the colourised version.
      */
 
-    public static String colorize(String message){
-        return ChatColor.translateAlternateColorCodes('&',message);
+    public static String colorize(String message) {
+        return ChatColor.translateAlternateColorCodes('&', message);
     }
 
 
