@@ -35,10 +35,28 @@ public final class PlayerListener implements Listener {
 
         Location spawn = new Location(player.getWorld(), 0, 100, 0);
 
+        /*
+              TODO using the methods in Common - create a new GUI and buttons that either kill the player or tp them back to spawn.
+              TODO exiting the menu will mean that they will be instantly killed.
+              TODO use the nested clickListener to handle the click and use event.cancel(boolean) to cancel the event.
+         */
+
+
         if (location.getBlockX() >= 100 | location.getBlockZ() >= 100 | location.getBlockX() <= -100 | location.getBlockZ() <= -100) {
             player.teleport(spawn);
             player.sendMessage(spawnMessage);
         }
+
+        class clickListener implements Listener {
+            @EventHandler
+            public void clickListener(InventoryClickEvent e) {
+
+
+            }
+        }
+
+
+
     }
 
     @EventHandler
