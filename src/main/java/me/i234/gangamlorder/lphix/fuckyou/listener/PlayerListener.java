@@ -1,7 +1,6 @@
 package me.i234.gangamlorder.lphix.fuckyou.listener;
 
 import me.i234.gangamlorder.lphix.fuckyou.utils.Common;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,6 +17,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerListener implements Listener {
 
@@ -71,26 +72,43 @@ public class PlayerListener implements Listener {
         }
     }
     @EventHandler
-    public void stronk(PlayerItemConsumeEvent event){
+    public void playerConsumeListener(PlayerItemConsumeEvent event) {
 
-        //Create GUI
-        Inventory inventory = Bukkit.createInventory(null, 27, ChatColor.translateAlternateColorCodes('&', "&b&lStronk"));
-        ItemStack[] contents = inventory.getContents();
-        //Now that we have the the contents of the inventory lets loop through them!
-        for (int index = 0; index < contents.length; index++) {
-            //Check if the item is null, if it isn't that means an item is present.
-            if (contents[index] != null) {
-                continue;
-            }
-            //Set the background to Black stained glass.
-            ItemStack background = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
-            ItemMeta itemMeta = background.getItemMeta();
-            itemMeta.setDisplayName(" ");
-            background.setItemMeta(itemMeta);
-            //Set the ItemStack of contents[index] to be the background.
-            contents[index] = background;
-        }
+        int size = 27;
+        String name = "&b&lDrink up!";
+        Map<Integer, ItemStack> buttonMap = new HashMap<>();
+        //Since the integer is the slot index...
 
+        ItemStack exit = new ItemStack(Material.BARRIER);
+        ItemMeta exitMeta = exit.getItemMeta();
+        exitMeta.setDisplayName(Common.colorize("&c&lExit"));
+        exitMeta.setLore(Arrays.asList(
+                Common.colorize("&cPress this button to exit the menu.")
+        ));
+        exit.setItemMeta(exitMeta);
+        buttonMap.put(12, exit); //Place the exit button at the 12th INDEX.
+
+
+        ItemStack yes = new ItemStack(Material.EMERALD_BLOCK);
+        ItemMeta yesMeta = yes.getItemMeta();
+        yesMeta.setDisplayName(Common.colorize("&a&lContinue to drink?"));
+        yesMeta.setLore(Arrays.asList(
+                Common.colorize("&aPress this button to continue drinking.")
+        ));
+        yes.setItemMeta(exitMeta);
+        buttonMap.put(16, yes);
+
+        ItemStack no = new ItemStack(Material.REDSTONE_BLOCK);
+        ItemMeta noMeta = no.getItemMeta();
+        noMeta.setDisplayName(Common.colorize("&c&lStop consuming"));
+        noMeta.setLore(Arrays.asList(
+                Common.colorize("&cPress this button to stop eating/drinking.")
+        ));
+        no.setItemMeta(noMeta);
+        buttonMap.put(13, no);
+
+        Inventory gui = Common.makeGUI(name, size, buttonMap, null);
+        event.getPlayer().openInventory(gui);
     }
 
 }
