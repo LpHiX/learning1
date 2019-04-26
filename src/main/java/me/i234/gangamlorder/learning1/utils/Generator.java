@@ -56,23 +56,25 @@ public class Generator extends BukkitRunnable {
 
         if (allowed.contains(left.getBlock().getType())) {
             Block block = world.getBlockAt(left.add(0, y, 0));
-            if (allowed.contains(block.getType())) {
-                block.setType(toSet);
+            Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
+            if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
             }
         } else if (allowed.contains(right.getBlock().getType())) {
             Block block = world.getBlockAt(right.add(0, y, 0));
-            if (allowed.contains(block.getType())) {
-                block.setType(toSet);
+            Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
+            if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
             }
         } else if (allowed.contains(front.getBlock().getType())) {
             Block block = world.getBlockAt(front.add(0, y, 0));
-            if (allowed.contains(block.getType())) {
+            Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
+            if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
                 block.setType(toSet);
             }
+
         } else if (allowed.contains(back.getBlock().getType())) {
             Block block = world.getBlockAt(back.add(0, y, 0));
-            if (allowed.contains(block.getType())) {
-                block.setType(toSet);
+            Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
+            if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
             }
         }
 
