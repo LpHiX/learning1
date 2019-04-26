@@ -20,20 +20,6 @@ public class Generator extends BukkitRunnable {
 
     }
 
-    {
-
-    }
-
-    {
-
-    }
-
-        else if(allowed.contains(right.getBlock().
-
-    private Generator() {
-
-    }))
-
     public Generator(Location original, Material toSet, Set<Material> allowed, int currentY) {
         this.allowed = allowed;
         this.original = original;
@@ -42,6 +28,20 @@ public class Generator extends BukkitRunnable {
         if (currentY < 0 || currentY > 255) {
             throw new IllegalStateException("Invalid Y limit.");
         }
+    }
+
+    {
+
+    }
+
+        else if(allowed.contains(right.getBlock().
+
+    {
+
+    }))
+
+    private Generator() {
+
     }
 
         else if(allowed.contains(front.getBlock().
@@ -53,7 +53,6 @@ public class Generator extends BukkitRunnable {
         else if(allowed.contains(back.getBlock().
 
     getType()))
-
     @Override
     public void run() {
         Location left = original.add(-1, -1, 0);
