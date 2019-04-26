@@ -47,16 +47,14 @@ public final class PlayerListener implements Listener {
             player.sendMessage(spawnMessage);
         }
 
-        class clickListener implements Listener {
+        class ClickListener implements Listener {
             @EventHandler
-            public void clickListener(InventoryClickEvent e) {
+            public void ClickListener(InventoryClickEvent e) {
 
 
             }
         }
-
-
-
+        Learning1.getInstance().getServer().getPluginManager().registerEvents(new ClickListener(), Learning1.getInstance());
     }
 
     @EventHandler
@@ -161,12 +159,7 @@ public final class PlayerListener implements Listener {
                 }
             }
         }
-        if (!registered) {
             Learning1.getInstance().getServer().getPluginManager().registerEvents(new InventoryListener(), Learning1.getInstance());
-            registered = true;
-        }
-
-
     }
 
 }
