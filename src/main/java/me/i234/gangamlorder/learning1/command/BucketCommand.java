@@ -33,7 +33,7 @@ public class BucketCommand implements CommandExecutor {
         item.setItemMeta(itemMeta);
         NBTItem nbtItem = new NBTItem(item);
         nbtItem.setString("customBucket", "yes");
-        nbtItem.setString("generateType", args[1]);
+        nbtItem.setString("generationType", args[1]);
         nbtItem.setString("blockType", args[0]);
         item = nbtItem.getItem();
         Player player = (Player) sender;
