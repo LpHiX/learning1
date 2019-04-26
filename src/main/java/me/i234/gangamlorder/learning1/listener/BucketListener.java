@@ -44,6 +44,7 @@ public class BucketListener implements Listener {
         allowed.add(Material.VOID_AIR);
 
         int currentY = location.getBlockY();
+        int test;
 
 
         Generator task = new Generator(location, Material.valueOf(nbtItem.getString("material")), allowed, GenerateType.valueOf(nbtItem.getString("generateType")));
