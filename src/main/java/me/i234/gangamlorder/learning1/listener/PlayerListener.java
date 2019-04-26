@@ -40,37 +40,38 @@ public final class PlayerListener implements Listener {
               TODO exiting the menu will mean that they will be instantly killed.
               TODO use the nested clickListener to handle the click and use event.cancel(boolean) to cancel the event.
          */
-        Map<Integer, ItemStack> DerekLiu = new HashMap<>();
-        ItemStack fuckYou = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to die."), Material.DIAMOND_SWORD);
-        DerekLiu.put(0, fuckYou);
-        ItemStack fuckFuck = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to exit."), Material.BARRIER);
-        DerekLiu.put(5, fuckFuck);
-        ItemStack iLoveYouYou = Common.makeButton("&c to spawn lol.", Arrays.asList("&c&lPress this button to to to spawn."), Material.BARRIER);
-        DerekLiu.put(8, iLoveYouYou);
+        Map<Integer, ItemStack> butonMap = new HashMap<>();
+        ItemStack kill = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to die."), Material.DIAMOND_SWORD);
+        butonMap.put(0, kill);
+        ItemStack exit = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to exit."), Material.BARRIER);
+        butonMap.put(5, exit);
+        ItemStack teleportSpawn = Common.makeButton("&b&lBe spared and teleport to spawn.", Arrays.asList("&bPress this button to go back to spawn."), Material.BARRIER);
+        butonMap.put(8, teleportSpawn);
 
-        Inventory imHard = Common.makeGUI("oh my penis!", 9, DerekLiu, null);
+        Inventory inv = Common.makeGUI("&a&lDeath or spawn?", 9, butonMap, null);
 
         if (location.getBlockX() >= 100 | location.getBlockZ() >= 100 | location.getBlockX() <= -100 | location.getBlockZ() <= -100) {
-            event.getPlayer().openInventory(imHard);
+            event.getPlayer().openInventory(inv);
             player.sendMessage(spawnMessage);
 
         }
 
         class ClickListener implements Listener {
             @EventHandler
-            public void ClickListener(InventoryClickEvent e) {
+            public void clickListener(InventoryClickEvent e) {
                 e.setCancelled(true);
-                if (!e.getInventory().equals(imHard)){return;}
+                if (!e.getInventory().equals(inv)) {
+                    return;
+                }
                 switch (e.getSlot()){
                     default:
                         break;
                     case 0:
                         player.setHealth(0.0);
-                        Common.tell(player, "&c&ldaisuki");
                         break;
                     case 5:
+                        Common.tell(player, "&cYou were warned...");
                         player.setHealth(0.0);
-                        Common.tell(player, "&c&ldaisuki");
                         break;
                     case 8:
                         player.teleport(spawn);
@@ -142,13 +143,6 @@ public final class PlayerListener implements Listener {
         Inventory gui = Common.makeGUI(name, size, buttonMap, null);
         event.getPlayer().openInventory(gui);
 
-
-        //TODO make sure this works.
-
-
-        /*
-        This is an expiermental nested class that will deal with the inventory clicking. No clue if this will work.
-         */
         class InventoryListener implements Listener {
             @EventHandler
             public void inventoryClickEvent(InventoryClickEvent event) {

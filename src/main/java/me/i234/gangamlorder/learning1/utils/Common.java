@@ -1,5 +1,6 @@
 package me.i234.gangamlorder.learning1.utils;
 
+import me.i234.gangamlorder.learning1.Learning1;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
 
 public class Common {
 
@@ -62,7 +64,7 @@ public class Common {
             }
 
             if (defaultItem == null) {
-                defaultItem = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
+                defaultItem = new ItemStack(Material.AIR);
                 ItemMeta defaultItemMeta = defaultItem.getItemMeta();
                 defaultItemMeta.setDisplayName(" ");
                 defaultItem.setItemMeta(defaultItemMeta);
@@ -109,5 +111,14 @@ public class Common {
         itemMeta.setLore(lore);
         item.setItemMeta(itemMeta);
         return item;
+    }
+
+    public static void log(Level level, String message) {
+
+        if (level == null) {
+            throw new IllegalArgumentException("Null level.");
+        }
+
+        Learning1.getInstance().getServer().getLogger().log(level, message);
     }
 }
