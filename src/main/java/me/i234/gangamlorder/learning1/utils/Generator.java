@@ -15,7 +15,7 @@ public class Generator extends BukkitRunnable {
     private Location original;
     private Material toSet;
     private Set<Material> allowed = new HashSet<>();
-    private int currentY;
+    private int currentY = 0;
     private GenerateType generateType;
 
     private Generator() {
@@ -36,8 +36,11 @@ public class Generator extends BukkitRunnable {
 
     @Override
     public void run() {
-        System.out.println("running");
-        int y = 0;
+        int y = original.getBlockY();
+
+        if (currentY == 0) {
+            currentY = y;
+        }
 
         switch (generateType) {
             case UP:
@@ -54,35 +57,43 @@ public class Generator extends BukkitRunnable {
         Location back = original.add(0, 0, -1);
         World world = left.getWorld();
 
-        System.out.println(y);
         if (allowed.contains(left.getBlock().getType())) {
             Block block = world.getBlockAt(left.add(0, y, 0));
             Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
-            if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
+            if (allowed.contains(block.getType())) {
+                System.out.println(block.getLocation());
                 block.setType(toSet);
+                block.getState().update(true);
             }
         } else if (allowed.contains(right.getBlock().getType())) {
             Block block = world.getBlockAt(right.add(0, y, 0));
             Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
-            if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
+            if (allowed.contains(block.getType())) {
                 block.setType(toSet);
+                block.getState().update(true);
             }
         } else if (allowed.contains(front.getBlock().getType())) {
             Block block = world.getBlockAt(front.add(0, y, 0));
             Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
-            if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
+            if (allowed.contains(block.getType())) {
                 block.setType(toSet);
+                block.getState().update(true);
             }
 
         } else if (allowed.contains(back.getBlock().getType())) {
             Block block = world.getBlockAt(back.add(0, y, 0));
             Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
-            if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
+            if (allowed.contains(block.getType())) {
                 block.setType(toSet);
+                block.getState().update(true);
             }
         }
 
         if (!allowed.contains(world.getBlockAt(original.add(0, currentY, 0)).getType())) {
+            this.cancel();
+        }
+
+        if (currentY > 254 || currentY == 0) {
             this.cancel();
         }
 

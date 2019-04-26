@@ -21,7 +21,6 @@ public final class Learning1 extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        // getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getServer().getPluginManager().registerEvents(new BucketListener(), this);
         getLogger().log(Level.WARNING, "I HATE YOU SO MUCH ANDY");
         getCommand("BucketCommand").setExecutor(new BucketCommand());

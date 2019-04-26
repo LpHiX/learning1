@@ -44,6 +44,6 @@ public class BucketListener implements Listener {
         allowed.add(Material.VOID_AIR);
         System.out.println(type);
         Generator task = new Generator(location, material, allowed, GenerateType.valueOf(type));
-        task.runTask(Learning1.getInstance());
+        task.runTaskTimer(Learning1.getInstance(), 10, 10);
     }
 }
