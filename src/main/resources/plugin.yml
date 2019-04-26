@@ -1,9 +1,9 @@
 name: Learning1
-version: ${project.version}
-main: Learning1
+version: 1.0-SNAPSHOT
+main: me.i234.gangamlorder.learning1.Learning1
 api-version: 1.13
 prefix: "Learning1"
 load: STARTUP
-authors: [fuckyouuuuuuuuuuuu]
-description: fuck you! <3
+authors: [andrewandy, lphix]
+description: First Spigot Plugin
 website: gangamlorder.i234.me

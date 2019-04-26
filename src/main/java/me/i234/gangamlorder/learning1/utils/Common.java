@@ -65,9 +65,6 @@ public class Common {
 
             if (defaultItem == null) {
                 defaultItem = new ItemStack(Material.AIR);
-                ItemMeta defaultItemMeta = defaultItem.getItemMeta();
-                defaultItemMeta.setDisplayName(" ");
-                defaultItem.setItemMeta(defaultItemMeta);
             }
             contents[i] = defaultItem;
         }

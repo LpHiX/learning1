@@ -1,7 +1,6 @@
 package me.i234.gangamlorder.learning1;
 
 import me.i234.gangamlorder.learning1.listener.BucketListener;
-import me.i234.gangamlorder.learning1.listener.PlayerListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -17,7 +16,7 @@ public final class Learning1 extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        getServer().getPluginManager().registerEvents(new PlayerListener(), this);
+        // getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getServer().getPluginManager().registerEvents(new BucketListener(), this);
         getLogger().log(Level.WARNING, "I HATE YOU SO MUCH ANDY");
     }

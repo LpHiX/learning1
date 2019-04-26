@@ -9,15 +9,16 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerBucketEvent;
+import org.bukkit.event.player.PlayerBucketEmptyEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class BucketListener implements Listener {
+
     @EventHandler
-    public void onBucketPlace(PlayerBucketEvent event) {
+    public void onBucketPlace(PlayerBucketEmptyEvent event) {
         ItemStack item = event.getItemStack();
         if (item == null) {
             return;
