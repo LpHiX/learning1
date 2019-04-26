@@ -40,17 +40,42 @@ public final class PlayerListener implements Listener {
               TODO exiting the menu will mean that they will be instantly killed.
               TODO use the nested clickListener to handle the click and use event.cancel(boolean) to cancel the event.
          */
+        Map<Integer, ItemStack> DerekLiu = new HashMap<>();
+        ItemStack fuckYou = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to die."), Material.DIAMOND_SWORD);
+        DerekLiu.put(0, fuckYou);
+        ItemStack fuckFuck = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to exit."), Material.BARRIER);
+        DerekLiu.put(5, fuckFuck);
+        ItemStack iLoveYouYou = Common.makeButton("&c to spawn lol.", Arrays.asList("&c&lPress this button to to to spawn."), Material.BARRIER);
+        DerekLiu.put(8, iLoveYouYou);
 
+        Inventory imHard = Common.makeGUI("oh my penis!", 9, DerekLiu, null);
 
         if (location.getBlockX() >= 100 | location.getBlockZ() >= 100 | location.getBlockX() <= -100 | location.getBlockZ() <= -100) {
-            player.teleport(spawn);
+            event.getPlayer().openInventory(imHard);
             player.sendMessage(spawnMessage);
+
         }
 
         class ClickListener implements Listener {
             @EventHandler
             public void ClickListener(InventoryClickEvent e) {
-
+                e.setCancelled(true);
+                if (!e.getInventory().equals(imHard)){return;}
+                switch (e.getSlot()){
+                    default:
+                        break;
+                    case 0:
+                        player.setHealth(0.0);
+                        Common.tell(player, "&c&ldaisuki");
+                        break;
+                    case 5:
+                        player.setHealth(0.0);
+                        Common.tell(player, "&c&ldaisuki");
+                        break;
+                    case 8:
+                        player.teleport(spawn);
+                        break;
+                }
 
             }
         }
@@ -101,9 +126,8 @@ public final class PlayerListener implements Listener {
         Map<Integer, ItemStack> buttonMap = new HashMap<>();
 
         // Make use of new utility method makeButton
-
-        //TODO Add an extra button. That shows the player's name and the current item they are holding.
-
+        ItemStack iHateYourPenis = Common.makeButton(event.getPlayer().getDisplayName(), Arrays.asList("&c&c&cAndy's broken wrist","&l&l&lAndy's broken dick to go along with it"), event.getItem().getType());
+        buttonMap.put(0, iHateYourPenis);
 
         ItemStack exit = Common.makeButton("&c&lExit.", Arrays.asList("&c&lPress this button to exit."), Material.BARRIER);
         buttonMap.put(10, exit); //Place the exit button at the 10th INDEX.
@@ -120,6 +144,7 @@ public final class PlayerListener implements Listener {
 
 
         //TODO make sure this works.
+
 
         /*
         This is an expiermental nested class that will deal with the inventory clicking. No clue if this will work.
