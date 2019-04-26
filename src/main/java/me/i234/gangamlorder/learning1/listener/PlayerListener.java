@@ -144,7 +144,6 @@ public final class PlayerListener implements Listener {
                         return;
                     case 10:
                         player.closeInventory();
-                        ;
                         Common.tell(player, "&cYou have closed the menu - the action has been cancelled.");
                         break;
                     case 13:
@@ -159,7 +158,7 @@ public final class PlayerListener implements Listener {
                 }
             }
         }
-            Learning1.getInstance().getServer().getPluginManager().registerEvents(new InventoryListener(), Learning1.getInstance());
+        Learning1.getInstance().getServer().getPluginManager().registerEvents(new InventoryListener(), Learning1.getInstance());
     }
 
 }

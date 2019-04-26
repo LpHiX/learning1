@@ -1,6 +1,7 @@
 package me.i234.gangamlorder.learning1.listener;
 
 import de.tr7zw.itemnbtapi.NBTItem;
+import me.i234.gangamlorder.learning1.Learning1;
 import me.i234.gangamlorder.learning1.utils.Generator;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class BucketListener implements Listener {
     @EventHandler
@@ -41,6 +43,9 @@ public class BucketListener implements Listener {
         allowed.add(Material.CAVE_AIR);
         allowed.add(Material.VOID_AIR);
 
-        Generator task = new Generator(location, Material.COBBLESTONE, allowed);
+        int currentY = location.getBlockY();
+
+        Generator task = new Generator(UUID.randomUUID(), location, Material.COBBLESTONE, allowed);
+        task.runTaskTimer(Learning1.getInstance(), 1, 11);
     }
 }
