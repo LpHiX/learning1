@@ -4,7 +4,7 @@ import me.i234.gangamlorder.learning1.Learning1;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -22,7 +22,7 @@ public class Common {
      * @param message the message you want to send.
      */
 
-    public static void tell(Player toWho, String message) {
+    public static void tell(CommandSender toWho, String message) {
         String newMessage = ChatColor.translateAlternateColorCodes('&', message);
         toWho.sendMessage(newMessage);
 

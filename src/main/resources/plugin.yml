@@ -7,3 +7,6 @@ load: STARTUP
 authors: [andrewandy, lphix]
 description: First Spigot Plugin
 website: gangamlorder.i234.me
+commands:
+  BucketCommand:
+    aliases: debugBucket

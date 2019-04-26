@@ -36,13 +36,7 @@ public class Generator extends BukkitRunnable {
 
     @Override
     public void run() {
-
-        Location left = original.add(-1, -1, 0);
-        Location right = original.add(1, -1, 0);
-        Location front = original.add(0, -1, 1);
-        Location back = original.add(0, -1, -1);
-        World world = left.getWorld();
-
+        System.out.println("running");
         int y = 0;
 
         switch (generateType) {
@@ -54,15 +48,24 @@ public class Generator extends BukkitRunnable {
                 break;
         }
 
+        Location left = original.add(-1, 0, 0);
+        Location right = original.add(1, 0, 0);
+        Location front = original.add(0, 0, 1);
+        Location back = original.add(0, 0, -1);
+        World world = left.getWorld();
+
+        System.out.println(y);
         if (allowed.contains(left.getBlock().getType())) {
             Block block = world.getBlockAt(left.add(0, y, 0));
             Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
             if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
+                block.setType(toSet);
             }
         } else if (allowed.contains(right.getBlock().getType())) {
             Block block = world.getBlockAt(right.add(0, y, 0));
             Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
             if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
+                block.setType(toSet);
             }
         } else if (allowed.contains(front.getBlock().getType())) {
             Block block = world.getBlockAt(front.add(0, y, 0));
@@ -75,6 +78,7 @@ public class Generator extends BukkitRunnable {
             Block block = world.getBlockAt(back.add(0, y, 0));
             Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
             if (allowed.contains(block.getType()) && allowed.contains(below.getType())) {
+                block.setType(toSet);
             }
         }
 
@@ -83,5 +87,6 @@ public class Generator extends BukkitRunnable {
         }
 
         currentY = (generateType == GenerateType.UP) ? currentY + 1 : currentY - 1;
+        System.out.println(currentY);
     }
 }

@@ -19,21 +19,20 @@ public class BucketListener implements Listener {
 
     @EventHandler
     public void onBucketPlace(PlayerBucketEmptyEvent event) {
-        ItemStack item = event.getItemStack();
-        if (item == null) {
+        ItemStack item = event.getPlayer().getInventory().getItem(event.getHand());
+        if (item == null || !event.getBucket().equals(Material.WATER_BUCKET)) {
             return;
         }
+        event.setCancelled(true);
+        Location location = event.getBlockClicked().getLocation();
         NBTItem nbtItem = new NBTItem(item);
         if (nbtItem.getString("customBucket") == null) {
             return;
         }
-
-
-        String type = nbtItem.getString("type");
+        String type = nbtItem.getString("generationType");
         String blockType = nbtItem.getString("blockType");
         Material material = Material.valueOf(blockType);
 
-        Location location = event.getBlockClicked().getLocation();
         World world = location.getWorld();
         if (world == null) {
             throw new IllegalStateException("Null world!");
@@ -43,11 +42,8 @@ public class BucketListener implements Listener {
         allowed.add(Material.AIR);
         allowed.add(Material.CAVE_AIR);
         allowed.add(Material.VOID_AIR);
-
-        int currentY = location.getBlockY();
-
-
-        Generator task = new Generator(location, Material.valueOf(nbtItem.getString("material")), allowed, GenerateType.valueOf(nbtItem.getString("generateType")));
-        task.runTaskTimer(Learning1.getInstance(), 10, 10);
+        System.out.println(type);
+        Generator task = new Generator(location, material, allowed, GenerateType.valueOf(type));
+        task.runTask(Learning1.getInstance());
     }
 }
