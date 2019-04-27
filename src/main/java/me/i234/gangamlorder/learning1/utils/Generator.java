@@ -18,6 +18,11 @@ public class Generator extends BukkitRunnable {
     private int currentY = 0;
     private GenerateType generateType;
 
+    private boolean front = true;
+    private boolean back = true;
+    private boolean left = true;
+    private boolean right = true;
+
     private Generator() {
     }
 
@@ -36,60 +41,62 @@ public class Generator extends BukkitRunnable {
 
     @Override
     public void run() {
-        int y = original.getBlockY();
+        currentY = original.getBlockY();
+        int y = 0;
 
-        if (currentY == 0) {
-            currentY = y;
-        }
+        Location left = original.clone().add(-1, y, 0);
+        Location right = original.clone().add(1, y, 0);
+        Location front = original.clone().add(0, y, 1);
+        Location back = original.clone().add(0, y, -1);
 
         switch (generateType) {
             case UP:
-                y = currentY + 1;
+                y = +1;
                 break;
             case DOWN:
-                y = -currentY - 1;
+                y = -1;
                 break;
         }
 
-        Location left = original.add(-1, 0, 0);
-        Location right = original.add(1, 0, 0);
-        Location front = original.add(0, 0, 1);
-        Location back = original.add(0, 0, -1);
+
         World world = left.getWorld();
+        if (allowed.contains(left.getBlock().getType()) && this.left) {
+            Location location = left.clone().add(0, y, 0);
+            Block block = world.getBlockAt(location.add(0, y, 0));
+            if (!allowed.contains(block.getType())) {
+                this.left = false;
+            }
+            block.setType(toSet);
 
-        if (allowed.contains(left.getBlock().getType())) {
-            Block block = world.getBlockAt(left.add(0, y, 0));
-            Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
-            if (allowed.contains(block.getType())) {
-                System.out.println(block.getLocation());
-                block.setType(toSet);
-                block.getState().update(true);
+        }
+        if (allowed.contains(right.getBlock().getType()) && this.right) {
+            Location location = right.clone().add(0, y, 0);
+            Block block = world.getBlockAt(location.add(0, y, 0));
+            if (!allowed.contains(block.getType())) {
+                this.right = false;
             }
-        } else if (allowed.contains(right.getBlock().getType())) {
-            Block block = world.getBlockAt(right.add(0, y, 0));
-            Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
-            if (allowed.contains(block.getType())) {
+            block.setType(toSet);
+
+        }
+        if (allowed.contains(front.getBlock().getType()) && this.front) {
+            Location location = front.clone().add(0, y, 0);
+            Block block = world.getBlockAt(location.add(0, y, 0));
+            if (!allowed.contains(block.getType())) {
                 block.setType(toSet);
-                block.getState().update(true);
-            }
-        } else if (allowed.contains(front.getBlock().getType())) {
-            Block block = world.getBlockAt(front.add(0, y, 0));
-            Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
-            if (allowed.contains(block.getType())) {
-                block.setType(toSet);
-                block.getState().update(true);
             }
 
-        } else if (allowed.contains(back.getBlock().getType())) {
-            Block block = world.getBlockAt(back.add(0, y, 0));
-            Block below = world.getBlockAt(block.getLocation().add(0, -1, 0));
-            if (allowed.contains(block.getType())) {
-                block.setType(toSet);
-                block.getState().update(true);
+        }
+        if (allowed.contains(back.getBlock().getType()) && this.back) {
+            Location location = back.clone().add(0, y, 0);
+            Block block = world.getBlockAt(location.add(0, y, 0));
+            if (!allowed.contains(block.getType())) {
+                this.back = false;
             }
+            block.setType(toSet);
+
         }
 
-        if (!allowed.contains(world.getBlockAt(original.add(0, currentY, 0)).getType())) {
+        if (!allowed.contains(world.getBlockAt(original.clone().add(0, y, 0)).getType())) {
             this.cancel();
         }
 
@@ -98,6 +105,7 @@ public class Generator extends BukkitRunnable {
         }
 
         currentY = (generateType == GenerateType.UP) ? currentY + 1 : currentY - 1;
+        original = new Location(original.getWorld(), original.getBlockX(), currentY, original.getBlockZ());
         System.out.println(currentY);
     }
 }
